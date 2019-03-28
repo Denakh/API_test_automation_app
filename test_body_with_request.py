@@ -73,29 +73,19 @@ def check_dictionary_using_param_types(dict_whole, dict_part):
 
 
 def check_list_using_param_values(list_whole, list_part):
-    sub_list_w = []
-    sub_list_p = []
-    for param in list_part:
-        if type(param) == dict:
-            sub_list_p.append(param)
-    for param in list_whole:
-        if type(param) == dict:
-            sub_list_w.append(param)
-    if len(sub_list_p) > len(sub_list_w):
-        return False
-    i = 0
-    l = 0
-    while i < len(sub_list_p):
-        mark = False
-        j = l+1
-        while j < len(sub_list_w):
-            if check_dictionary_using_param_values(sub_list_w[j], sub_list_p[i]):
-                mark = True
-                l = j
-                break
-            j += 1
-        if mark is False:
-            return False
-
-
-
+    for i in range(0, len(list_part)):
+        if list_part[i] != {}:
+            if type(list_part[i]) == dict and type(list_whole[i]) == dict:
+                subdict_p = list_part[i]
+                subdict_w = list_whole[i]
+                if check_dictionary_using_param_values(subdict_w, subdict_p) is False:
+                    return False
+            elif type(list_part[i]) == list and type(list_whole[i]) == list:
+                int_list_part = list_part[i]
+                int_list_whole = list_whole[i]
+                if check_list_using_param_values(int_list_whole, int_list_part) is False:
+                    return False
+            else:
+                if list_part[i] != list_whole[i]:
+                    return False
+    return True
