@@ -15,21 +15,28 @@ def main_test_function(test_data):
     response = ""
     if test_data["request_type"] == "post":
         response = requests.post(url, data=payload, headers=headers)
+    elif test_data["request_type"] == "get":
+        response = requests.get(url, headers=headers)
 
-    response_body = json.loads(response.text)
+    if test_data["expected_error_message"] == "":
+        response_body = json.loads(response.text)
+    else:
+        actual_error_message = response.text
+
     actual_status_code = response.status_code
 
     assert actual_status_code == test_data["expected_status_code"], \
         "actual status code doesn't match expected"
     if test_data["expected_error_message"] == "":
         if test_data["validation_type"] == "value":
-            assert check_dictionary_using_param_values(response_body, test_data["expected_json_part"], decimal_accuracy), \
+            assert check_dictionary_using_param_values(response_body, test_data["expected_json_part"],
+                                                       decimal_accuracy), \
                 "actual JSON param value(s) doesn't match expected"
         else:
             assert check_dictionary_using_param_types(response_body, test_data["expected_json_part"]), \
                 "actual JSON param type(s) doesn't match expected"
     else:
-        assert test_data["actual_error_message"] == test_data["expected_error_message"], \
+        assert actual_error_message == test_data["expected_error_message"], \
             "actual error message doesn't match expected"
     print("PASSED ;")
 
