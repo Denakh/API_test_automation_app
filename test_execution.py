@@ -24,6 +24,7 @@ test_data_list_ex = [
           }
        },
        "validation_type": "type",
+       "decimal_accuracy": 2,
        "expected_error_message": ""
     },
     {
@@ -34,6 +35,7 @@ test_data_list_ex = [
        "expected_status_code": 400,
        "expected_json_part": {},
        "validation_type": "",
+       "decimal_accuracy": 2,
        "expected_error_message": "error"
     }
  ]
