@@ -1,4 +1,3 @@
-from time import sleep
 
 import pytest
 
@@ -29,16 +28,6 @@ test_data_list = [
         "expected_error_message": ""
     }
 ]
-
-
-@pytest.fixture()
-def extended_param_using(request, test_data):
-    time_to_next_test = test_data["time_to_next_test"]
-
-    def extended_param_using_teardown():
-        sleep(time_to_next_test)
-
-    request.addfinalizer(extended_param_using_teardown)
 
 
 @pytest.mark.parametrize(
