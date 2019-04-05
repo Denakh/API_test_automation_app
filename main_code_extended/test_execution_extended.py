@@ -2,7 +2,7 @@
 import pytest
 
 from main_code_extended.data_list_helper import get_test_data_list_reformat
-from main_code_extended.test_body_with_request_extended import main_test_function_extended
+from main_code_extended.test_body_with_request_extended_helper import main_test_function_extended
 
 test_data_list = [
     {

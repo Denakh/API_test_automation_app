@@ -1,6 +1,6 @@
 import pytest
 
-from main_code.test_body_with_request import main_test_function
+from main_code.test_body_with_request_helper import main_test_function
 
 test_data_list = [
     {
